@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud/components/user_tile.dart';
-import 'package:flutter_crud/models/user.dart';
 import 'package:flutter_crud/provider/users.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +14,9 @@ class UserList extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () {},
+            onPressed: () {
+              users.remove(users.byIndex(0));
+            },
           )
         ],
       ),
