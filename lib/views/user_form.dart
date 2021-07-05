@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/models/user.dart';
+import 'package:flutter_crud/provider/users.dart';
+import 'package:provider/provider.dart';
 
 class UserForm extends StatelessWidget {
   final _form = GlobalKey<FormState>();
+  final Map<String, String> _formData = {};
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +20,14 @@ class UserForm extends StatelessWidget {
 
               if (isValid) {
                 _form.currentState.save();
+                Provider.of<Users>(context, listen: false).put(
+                  User(
+                    id: _formData['id'],
+                    name: _formData['name'],
+                    email: _formData['email'],
+                    avatarUrl: _formData['avatarUrl'],
+                  ),
+                );
                 Navigator.of(context).pop();
               }
             },
@@ -40,15 +52,15 @@ class UserForm extends StatelessWidget {
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  print(value);
-                },
+                onSaved: (value) => _formData['name'] = value,
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'E-mail'),
+                onSaved: (value) => _formData['email'] = value,
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'URK do Avatar'),
+                onSaved: (value) => _formData['avatarUrl'] = value,
               ),
             ],
           ),
