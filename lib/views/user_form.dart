@@ -24,20 +24,21 @@ class UserForm extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(15),
-        key: _form,
         child: Form(
+          key: _form,
           child: Column(
             children: <Widget>[
               TextFormField(
                 decoration: InputDecoration(labelText: 'Nome'),
                 validator: (value) {
-                  if(value == null || value.trim().isEmpty{
+                  if (value == null || value.trim().isEmpty) {
                     return 'Nome Inválido';
                   }
 
-                  if(value.trim().length < 3 ){
+                  if (value.trim().length < 3) {
                     return 'Nome pequeno, no mínimo 3 letras';
                   }
+                  return null;
                 },
                 onSaved: (value) {
                   print(value);
